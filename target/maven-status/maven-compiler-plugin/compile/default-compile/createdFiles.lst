@@ -1,1 +1,5 @@
-runner\Start.class
+managers\WebDriverManager$1.class
+CucumberOptions\TestRunner.class
+CucumberOptions\failedScanario.class
+StepDefinitions\MyStepDefinition.class
+StepDefinitions\Hooks.class

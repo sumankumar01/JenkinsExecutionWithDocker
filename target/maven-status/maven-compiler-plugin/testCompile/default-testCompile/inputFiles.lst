@@ -1,1 +1,4 @@
-D:\AutonationWithDockerJenkins\ExecutionOnJenkins\src\test\java\runner\Start.java
+D:\AutonationWithDockerJenkins\ExecutionOnJenkins\src\test\java\StepDefinitions\MyStepDefinition.java
+D:\AutonationWithDockerJenkins\ExecutionOnJenkins\src\test\java\CucumberOptions\failedScanario.java
+D:\AutonationWithDockerJenkins\ExecutionOnJenkins\src\test\java\CucumberOptions\TestRunner.java
+D:\AutonationWithDockerJenkins\ExecutionOnJenkins\src\test\java\StepDefinitions\Hooks.java
