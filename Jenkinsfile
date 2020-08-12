@@ -45,7 +45,7 @@ pipeline {
          steps{
            
                   // a directory 'search' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=runner.Start -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/test-output --network ${network} vagrant/containertest"
+                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=CucumberOptions.TestRunner -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/test-output --network ${network} vagrant/containertest"
                   //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
             
