@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-slim
 
-WORKDIR /usr/share/suman
+WORKDIR /usr/share/suman/
 
 ADD /target/container-test-tests.jar container-test.jar
 ADD  /target/libs libs
