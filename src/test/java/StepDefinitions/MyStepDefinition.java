@@ -97,7 +97,7 @@ for (NetworkInterface netint : Collections.list(nets))
 
 InetAddress IP=InetAddress.getLoopbackAddress();
 System.out.println(IP);
-RemoteWebDriver  driver = new RemoteWebDriver(new URL("http://192.168.33.10:4444/wd/hub"), dc);
+RemoteWebDriver  driver = new RemoteWebDriver(new URL("http://192.168.3.12:4444/wd/hub"), dc);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
 	        Thread.sleep(5000);
 	        System.out.printf(driver.getCurrentUrl());
