@@ -27,7 +27,7 @@ pipeline {
         //sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
                 sleep(time:80,unit:"SECONDS") 
                 
-                sh "docker run -d -P -p "4444:4444" --name ${seleniumHub} selenium/hub"
+                sh "docker run -d -P -p 4444:4444 --name ${seleniumHub} selenium/hub"
                 sh  "docker run -d -P -p 5900:5900 --link selenium-hub:hub selenium/node-chrome-debug:3.141.59-yttrium"
                 
         
