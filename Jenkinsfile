@@ -24,8 +24,12 @@ pipeline {
          //   sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
            // sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} -p 5900:32768 selenium/node-chrome-debug:3.141.59-yttrium"
          //sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${firefox} -p 5901:32769 selenium/node-firefox-debug"
-        sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+        //sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
                 sleep(time:80,unit:"SECONDS") 
+                
+                sh "docker run -d -P -p "4444:4444" --name ${seleniumHub} selenium/hub"
+                sh  "docker run -d -P -p 5900:5900 --link selenium-hub:hub selenium/node-chrome-debug:3.141.59-yttrium"
+                
         
          }
       }
@@ -52,9 +56,12 @@ pipeline {
            
                   // a directory 'search' is created for container test-output
                  // sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome  -v ${WORKSPACE}/target:/usr/share/suman/ --network ${network} vagrant/containertest"
-                 
                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome  -v ${WORKSPACE}/target:/usr/share/suman/ vagrant/containertest"
                   //archive all the files under 'search' directory
+                  
+                  
+          
+                  
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
             
                             
