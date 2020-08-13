@@ -99,25 +99,25 @@ InetAddress IP=InetAddress.getLoopbackAddress();
 System.out.println(IP);
 RemoteWebDriver  driver = new RemoteWebDriver(new URL("http://192.168.3.12:4444/wd/hub"), dc);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        
 	        System.out.printf(driver.getCurrentUrl());
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
-	        Thread.sleep(1000000);
+	        Thread.sleep(10000);
 	
 		 /*Reporter.addStepLog("running step I am on rhp Flight egestration page");
 		 Reporter.addStepLog("running step I am on rhp Flight egestration page................");*/
