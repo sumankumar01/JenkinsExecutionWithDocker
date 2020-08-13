@@ -28,7 +28,7 @@ pipeline {
                 sleep(time:80,unit:"SECONDS") 
                 
                 sh "docker run -d -P -p 4444:4444 --name ${seleniumHub} selenium/hub"
-                sh  "docker run -d -P -p 5900:5900 --link selenium-hub:hub selenium/node-chrome-debug:3.141.59-yttrium"
+                sh  "docker run -d -P  -p 5900:5900 --link ${seleniumHub}:hub  --name ${chrome} selenium/node-chrome-debug:3.141.59-yttrium"
                 
         
          }
@@ -71,11 +71,11 @@ pipeline {
       stage('Tearing Down Selenium Grid') {
           steps {
              //remove all the containers and volumes
-             //sh "docker rm -vf ${chrome}"
+             sh "docker rm -vf ${chrome}"
            // sh "docker rm -vf ${firefox}"
-            //sh "docker rm -vf ${seleniumHub}"
+        sh "docker rm -vf ${seleniumHub}"
             // sh "docker network rm ${network}"
-            sh 'docker stop zalenium'
+          //  sh 'docker stop zalenium'
           }
         }   
    }
