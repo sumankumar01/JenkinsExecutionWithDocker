@@ -19,7 +19,7 @@ import cucumber.api.junit.Cucumber;
 			tags={"@Registartion"},
 		
 		
-		glue={"StepDefinitions"}
+		glue={"src//test//java//StepDefinitions"}
 		
 		)
 public class TestRunner {
