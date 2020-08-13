@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 	 //features={"\\src\\test\\resources\\Features\\"},
-				 features={"src//test//resources//features//"},
+				 features={"src//test//resources//Features"},
 		plugin = { "html:target/cucumber-html-report",
 		        "json:target/cucumber.json", "pretty:target/cucumber-pretty.txt",
 		    "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html",
