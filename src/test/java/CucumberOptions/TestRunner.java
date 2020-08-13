@@ -17,9 +17,9 @@ import cucumber.api.junit.Cucumber;
 		"rerun:target/rerun.txt"
 		       },
 			tags={"@Registartion"},
+		//dryRun=true,
 		
-		
-		glue={"src//test//java//StepDefinitions"}
+		glue={"StepDefinitions"}
 		
 		)
 public class TestRunner {
