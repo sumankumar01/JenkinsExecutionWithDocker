@@ -13,7 +13,16 @@ pipeline {
                 }
             }
    
- stages{
+
+   stages{
+      stage('Setting Up Selenium Grid') {
+         steps{        
+            sh "docker network create ${network}"
+            sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
+            sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} -p 5900:32768 selenium/node-chrome-debug"
+            sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${firefox} -p 5901:32769 selenium/node-firefox-debug"
+         }
+      }
 	stage('Build Jar') {
 	
 	 
@@ -36,28 +45,22 @@ pipeline {
          steps{
            
                   // a directory 'search' is created for container test-output
-                //  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=runner.Start -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/test-output --network ${network} vagrant/containertest"
-               //sh "docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium"
-               
-				sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
-                sleep(time:80,unit:"SECONDS") 
-			   sh "docker run --rm -e SELENIUM_HUB=${seleniumHub}  -e BROWSER=chrome -e MODULE=CucumberOptions.TestRunner  -v ${WORKSPACE}/cucumberextentreport:/usr/share/suman/test-output vagrant/containertest"
-				//sh './node_modules/.bin/wdio wdio.conf.js'
-
-				//archive all the files under 'search' directory
+                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=CucumberOptions.TestRunner -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/ --network ${network} vagrant/containertest"
+                  //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
             
                             
             
          }
       }
-	  
-	  stage ('Stop Zalenium'){
-                steps{
-                    sh 'docker stop zalenium'
-                }
-            }
-		
-      
+      stage('Tearing Down Selenium Grid') {
+          steps {
+             //remove all the containers and volumes
+             sh "docker rm -vf ${chrome}"
+            sh "docker rm -vf ${firefox}"
+            sh "docker rm -vf ${seleniumHub}"
+             sh "docker network rm ${network}"
+          }
+        }   
    }
 }

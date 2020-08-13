@@ -7,7 +7,7 @@ ADD  /target/libs libs
 
 ADD pom.xml pom.xml
 ENV BROWSER = chrome
-ENV POMM  = cucumberextentreport
+ENV POMM  = AutomationPipeline
 ENV SELENIUM_HUB = http://192.168.3.12:4444
 
-ENTRYPOINT java -cp container-test.jar:libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER CucumberOptions.TestRunner  /usr/share/suman/$POMM
+ENTRYPOINT java -cp container-test.jar:libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER CucumberOptions.TestRunner /usr/share/suman/
