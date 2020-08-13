@@ -99,32 +99,32 @@ InetAddress IP=InetAddress.getLoopbackAddress();
 System.out.println(IP);
 RemoteWebDriver  driver = new RemoteWebDriver(new URL("http://192.168.3.12:4444/wd/hub"), dc);
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(5000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(5000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(5000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(5000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	        driver.get("https://stackoverflow.com/questions/50042753/how-to-build-docker-images-using-a-declarative-jenkinsfile");
-	        Thread.sleep(5000);
+	        Thread.sleep(10000);
 	        System.out.printf(driver.getCurrentUrl());
 	
 	
-		 Reporter.addStepLog("running step I am on rhp Flight egestration page");
-		 Reporter.addStepLog("running step I am on rhp Flight egestration page................");
+		 /*Reporter.addStepLog("running step I am on rhp Flight egestration page");
+		 Reporter.addStepLog("running step I am on rhp Flight egestration page................");*/
 	}
 
 	@When("Enter the information of User")
 	public void enter_the_information_of_User() {
 		//ExtentTestManager.childstartTest("Enter the information of User");
 		
-		 Reporter.addStepLog("running step Enter the information of User");
-		 Reporter.addStepLog("running step Enter the information of User................");
+		 /*Reporter.addStepLog("running step Enter the information of User");
+		 Reporter.addStepLog("running step Enter the information of User................");*/
 	}
 
 	@Then("Registration should be successfull")
