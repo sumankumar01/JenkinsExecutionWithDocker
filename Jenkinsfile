@@ -20,10 +20,13 @@ pipeline {
          
          //docker run -d -P -p 5900:5900 --link selenium-hub:hub selenium/node-chrome-debug:3.141.59-yttrium
          //docker run -d -P -p 5901:5900 --link selenium-hub:hub selenium/node-firefox-debug:3.141.59-yttrium  
-            sh "docker network create ${network}"
-            sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
-            sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} -p 5900:32768 selenium/node-chrome-debug:3.141.59-yttrium"
+          //  sh "docker network create ${network}"
+         //   sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
+           // sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} -p 5900:32768 selenium/node-chrome-debug:3.141.59-yttrium"
          //sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${firefox} -p 5901:32769 selenium/node-firefox-debug"
+        sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+                sleep(time:80,unit:"SECONDS") 
+        
          }
       }
 	stage('Build Jar') {
@@ -48,7 +51,9 @@ pipeline {
          steps{
            
                   // a directory 'search' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome  -v ${WORKSPACE}/target:/usr/share/suman/ --network ${network} vagrant/containertest"
+                 // sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome  -v ${WORKSPACE}/target:/usr/share/suman/ --network ${network} vagrant/containertest"
+                 
+                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome  -v ${WORKSPACE}/target:/usr/share/suman/ vagrant/containertest"
                   //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
             
@@ -59,10 +64,11 @@ pipeline {
       stage('Tearing Down Selenium Grid') {
           steps {
              //remove all the containers and volumes
-             sh "docker rm -vf ${chrome}"
-            sh "docker rm -vf ${firefox}"
-            sh "docker rm -vf ${seleniumHub}"
-             sh "docker network rm ${network}"
+             //sh "docker rm -vf ${chrome}"
+           // sh "docker rm -vf ${firefox}"
+            //sh "docker rm -vf ${seleniumHub}"
+            // sh "docker network rm ${network}"
+            sh 'docker stop zalenium'
           }
         }   
    }
