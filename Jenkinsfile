@@ -3,7 +3,7 @@ def seleniumHub='selenium-hub-${BUILD_NUMBER}'
 def chrome='chrome-${BUILD_NUMBER}'
 def firefox='firefox-${BUILD_NUMBER}'
 def containertest='conatinertest-${BUILD_NUMBER}'
-   
+  def MODL='cucumber.api.cli.Main --glue "StepDefinitions" classpath:Features' 
 pipeline {
   
         agent {
@@ -45,7 +45,7 @@ pipeline {
          steps{
            
                   // a directory 'search' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE="cucumber.api.cli.Main --glue "StepDefinitions" classpath:Features" -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/ --network ${network} vagrant/containertest"
+                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=${MODL} -v ${WORKSPACE}/AutomationPipeline:/usr/share/suman/ --network ${network} vagrant/containertest"
                   //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
             
