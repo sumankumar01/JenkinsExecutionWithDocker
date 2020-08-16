@@ -25,7 +25,7 @@ pipeline {
            // sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} -p 5900:32768 selenium/node-chrome-debug:3.141.59-yttrium"
          //sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${firefox} -p 5901:32769 selenium/node-firefox-debug"
         //sh "docker run -d --rm -i --name zalenium -p 4444:4444  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
-                sleep(time:80,unit:"SECONDS") 
+                //sleep(time:80,unit:"SECONDS") 
                 
                 sh "docker run -d -P -p 4444:4444 --name ${seleniumHub} selenium/hub"
                 sh  "docker run -d -P  -p 5900:5900 --link ${seleniumHub}:hub  --name ${chrome} selenium/node-chrome-debug:3.141.59-yttrium"
